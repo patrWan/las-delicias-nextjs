@@ -75,7 +75,7 @@ export default function newSale() {
         <div className="w-full md:w-1/2">
             <Tabs className="w-full max-w-md px-2 py-8 sm:px-0">
                 <Tab.Panel className={classNames(
-                    'rounded-xl bg-white p-3', 'ring-white/60 ring-offset-2 ring-offset-blue-400 focus:outline-none focus:ring-2', 'flex justify-center'
+                    'rounded-xl bg-white p-3', 'ring-teal/60 ring-offset-2 ring-offset-teal-400 focus:outline-none focus:ring-2', 'flex justify-center'
                 )}>
                     <div className="flex flex-col p-4 md:w-1/2 items">
                         <div className='flex flex-col md:flex-row'>
@@ -97,8 +97,7 @@ export default function newSale() {
 
                             </select>
                             <div className='flex md:flex-col'>
-                                <p className='font-semibold'>Precio:  {selectedProduct ? '$' + selectedProduct.product_price : '-'}</p>
-                                <p className='font-semibold'>Subtotal:  {selectedProduct ? '$' + selectedProduct.product_price * quantity : '-'}</p>
+                                <p className='font-semibold'>Subtotal:  {selectedProduct ? '$' + selectedProduct.product_price * quantity : ''}</p>
                             </div>
 
                         </div>

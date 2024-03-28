@@ -87,14 +87,14 @@ export default function modalSale(props) {
                                 <p className="float-right">Total a pagar: <span className="text-xl font-bold">${total}</span></p>
                             </div>
                             <div className="my-2">
-                                <select name="state" id="state" className="w-full p-2 border-2" onChange={handleSelect}>
+                                <select name="state" id="state" className="w-full p-2 border-2 border-teal-900 bg-teal-950 text-white" onChange={handleSelect}>
                                     <option value="true">Pagado</option>
                                     <option value="false">Pendiente</option>
                                 </select>
                             </div>
                             <div>
                                 <button
-                                    className={`text-slate-200 p-2 mt-2 w-full ${sale.length == 0 ? 'bg-blue-400' : 'bg-blue-600 hover:bg-blue-400 hover:text-white'}`}
+                                    className={`text-slate-200 p-2 mt-2 w-full ${sale.length == 0 ? 'bg-teal-400' : 'bg-teal-600 hover:bg-teal-400 hover:text-white'}`}
                                     onClick={confirmSale}
                                     disabled={sale.length == 0 ? true : false}
                                 >Confirmar venta </button>

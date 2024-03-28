@@ -7,13 +7,13 @@ export default function Tabs({ children }) {
   }
   return (
     <Tab.Group>
-      <Tab.List className="w-full flex space-x-1 rounded-xl bg-blue-600 p-1 my-2">
+      <Tab.List className="w-full flex space-x-1 rounded-xl bg-teal-900 p-1 my-2">
         <Tab className={({ selected }) =>
           classNames(
             'w-full rounded-lg py-2.5 text-sm font-medium leading-5 flex justify-center items-center',
-            'ring-white/60 ring-offset-2 ring-offset-blue-400 focus:outline-none focus:ring-2',
+            'ring-white/60 ring-offset-2 ring-offset-teal-400 focus:outline-none focus:ring-2',
             selected
-              ? 'bg-white text-blue-700 shadow'
+              ? 'bg-teal-200 text-teal-700 shadow'
               : 'text-blue-100 hover:bg-white/[0.12] hover:text-white'
           )
         }>
@@ -23,9 +23,9 @@ export default function Tabs({ children }) {
         <Tab className={({ selected }) =>
           classNames(
             'w-full rounded-lg py-2.5 text-sm font-medium leading-5',
-            'ring-white/60 ring-offset-2 ring-offset-blue-400 focus:outline-none focus:ring-2',
+            'ring-white/60 ring-offset-2 ring-offset-teal-400 focus:outline-none focus:ring-2',
             selected
-              ? 'bg-white text-blue-700 shadow'
+              ? 'bg-teal-200 text-teal-700 shadow'
               : 'text-blue-100 hover:bg-white/[0.12] hover:text-white'
           )
         }>
