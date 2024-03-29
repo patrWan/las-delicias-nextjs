@@ -7,6 +7,7 @@ import Popup from "../popup";
 import { TrashIcon } from '@heroicons/react/24/solid';
 import toast from 'react-hot-toast';
 import { create } from "@/app/actions";
+import { redirect } from "next/navigation";
 
 export default function modalSale(props) {
     const { sale, total, setTotal, setSale, setSelectedProduct } = props;
@@ -41,7 +42,7 @@ export default function modalSale(props) {
         setResult(true);
 
         setOpen(!open);
-        setOpenPopUp(!openPopUp);
+        toast.success('Venta registrada con exito');
 
         setSale([]);
         setSelectedProduct('');
@@ -49,6 +50,7 @@ export default function modalSale(props) {
 
         
         create(total, paid, sale);
+        
 
     }
 

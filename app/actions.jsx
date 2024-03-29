@@ -34,7 +34,6 @@ export async function create(total, paid, sale) {
         await fetch('http://localhost:3000/api/sales', requestOptions)
             .then(response => {
                 if (response.status == 200) {
-                    console.log('ok')
                     revalidatePath('/dashboard');
                     
                 } else {
@@ -45,7 +44,9 @@ export async function create(total, paid, sale) {
                 }
             })
     } catch (error) {
-        alert(error);
+        console.log(error);
+    } finally {
+        redirect('/dashboard/sales');
     }
 
     
