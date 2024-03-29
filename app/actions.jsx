@@ -4,8 +4,19 @@ import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 
 export async function create(total, paid, sale) {
+    var now = new Date();
+    var y = now.getFullYear();
+    var m = now.getMonth() + 1;
+    var d = now.getDate();
+
+    //月と日は0埋めを行う
+    m = m < 10 ? "0" + m : m;
+    d = d < 10 ? "0" + d : d;
+
+    var date = y + "-" + m + "-" + d;
+    
     const body = {
-        date: new Date(),
+        date,
         total,
         state: paid,
         products: sale,

@@ -15,8 +15,8 @@ export const getProducts = async() => {
 
 export const getSales = async(date) => {
     const result = await client.execute({
-        sql : 'SELECT * FROM Sale WHERE Sale.sale_date LIKE ? ORDER BY Sale.sale_date DESC;',
-        args:['%'+date+'%']
+        sql : 'SELECT * FROM Sale WHERE Sale.sale_date = ? ORDER BY Sale.sale_date DESC;',
+        args:[date]
     });
     return result.rows;
 }
@@ -80,4 +80,18 @@ export const getTodaySales = async (date) => {
     return result.rows;
 }
 
+export const getProductSales = async (date) => {
+    const result = await client.execute({
+        sql : `SELECT Product.product_name,SUM( Detail.detail_quantity) AS 'cantidad', SUM(Detail.detail_subtotal) AS 'subtotal'  
+        FROM Detail, Product, Sale
+        WHERE Product.product_id = Detail.product_id  AND Sale.sale_id = Detail.sale_id
+        AND Sale.sale_date LIKE ?
+        GROUP BY Product.product_name;`,
+        args:['%'+date+'%']
+    });
+
+    return result.rows;
+}
+
 export const dynamic = "force-dynamic";
+

@@ -19,7 +19,7 @@ export async function GET(req){
 
 export async function POST(req){
     const data = await req.json();
-
+    console.log(data.date)
     const result = await addSale(data.date, data.total, data.state);
 
     const id_sale = result.toString();
