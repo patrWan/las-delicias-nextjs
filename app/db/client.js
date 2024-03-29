@@ -13,6 +13,14 @@ export const getProducts = async() => {
     return result.rows;
 }
 
+export const addProduct =  async(name, price) => {
+    const result = await client.execute({
+        sql : 'INSERT INTO Product (product_name, product_price, product_image) VALUES(?, ?, null);',
+        args:[name, price]
+    });
+    return result.rows;
+}
+
 export const getSales = async(date) => {
     const result = await client.execute({
         sql : 'SELECT * FROM Sale WHERE Sale.sale_date LIKE ? ORDER BY Sale.sale_date DESC;',

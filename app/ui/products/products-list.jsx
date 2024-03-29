@@ -5,7 +5,7 @@ export default async function productList() {
   const products = await getProducts();
 
   return (
-    <div>
+    <div className='my-8'>
       <p className='text-teal-500/80 text-sm my-2'> Lista de productos</p>
       <div className='flex flex-col bg-white shadow-md p-2 rounded-md'> 
         {products.map((product) => {

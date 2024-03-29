@@ -33,9 +33,9 @@ export default function ({ children }) {
             </div>
 
 
-            <div className="w-full min-h-max bg-teal-600"   >
+            <div className="w-full min-h-full bg-teal-600"   >
                 <div className="bg-repeat w-full h-full text-primary-100 heropattern-overlappinghexagons-teal-900" >
-                    <div className="flex-grow p-6 md:overflow-y-auto md:p-12">
+                    <div className="flex-grow p-4 md:overflow-y-auto md:p-12">
                         {children}
                     </div>
                 </div>

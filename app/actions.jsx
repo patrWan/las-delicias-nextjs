@@ -68,3 +68,33 @@ export async function deleteSale(sales, saleId){
         });
     return res;
 }
+
+export async function addProduct(productName, productPrice) {
+    const body = {
+        productName,
+        productPrice
+    }
+
+    const requestOptions = {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(body)
+    };
+
+    try {
+        await fetch('http://localhost:3000/api/products', requestOptions).then(response => {
+        if (response.status == 200) {
+           
+        } else {
+            alert(response.status);
+        }
+    })
+    } catch (error) {
+        console.log(error)
+    }finally {
+        redirect('/dashboard/products');
+    }
+    
+
+
+}
