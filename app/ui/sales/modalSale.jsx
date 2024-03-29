@@ -60,7 +60,7 @@ export default function modalSale(props) {
                 className={''/*`w-screen h-full fixed z-10 left-0 top-0 overflow-auto transition-colors ${open ? 'visible bg-black/80' : 'invisible'}`*/}
             >
 
-                <div className={`bg-slate-50  md:mx-auto flex flex-col `}>
+                <div className={`bg-slate-50 md:mx-auto flex flex-col `}>
                     <div className="flex flex-col items-center">
                         <div className="mt-2 w-full">
                             <div className="flex justify-between bg-black text-white text-sm uppercase w-full p-2">

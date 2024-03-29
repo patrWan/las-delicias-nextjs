@@ -15,8 +15,8 @@ export const getProducts = async() => {
 
 export const getSales = async(date) => {
     const result = await client.execute({
-        sql : 'SELECT * FROM Sale WHERE Sale.sale_date = ? ORDER BY Sale.sale_date DESC;',
-        args:[date]
+        sql : 'SELECT * FROM Sale WHERE Sale.sale_date LIKE ? ORDER BY Sale.sale_date DESC;',
+        args:['%'+date+'%']
     });
     return result.rows;
 }

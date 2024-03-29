@@ -13,7 +13,9 @@ export async function create(total, paid, sale) {
     m = m < 10 ? "0" + m : m;
     d = d < 10 ? "0" + d : d;
 
-    var date = y + "-" + m + "-" + d;
+    var time = now.getHours() + ":" + now.getMinutes() + ":" +now.getSeconds();
+
+    var date = y + "-" + m + "-" + d + " "+time;
     
     const body = {
         date,

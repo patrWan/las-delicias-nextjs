@@ -72,7 +72,7 @@ export default function newSale() {
     }
 
     return (
-        <div className="w-full md:w-1/2">
+        <div className="w-full md:w-1/2 bg-zinc-800 p-2 rounded-md shadow-xl border-2 border-teal-500">
             <Tabs className="w-full max-w-md px-2 py-8 sm:px-0">
                 <Tab.Panel className={classNames(
                     'rounded-xl bg-white p-3', 'ring-teal/60 ring-offset-2 ring-offset-teal-400 focus:outline-none focus:ring-2', 'flex justify-center'

@@ -3,13 +3,20 @@ import { Page, Text, View, Document, StyleSheet, Font } from '@react-pdf/rendere
 
 // Create Document Component
 function ResumePdf({ items }) {
+    const total = items.reduce((acc, x) => {
+        return acc + x.subtotal
+    }, 0);
 
     return (
         <Document>
             <Page style={styles.body}>
                 <View style={styles.header}>
-                    <Text style={styles.title}>Fecha: 26 de diciembre de 2024</Text>
-                    <Text style={styles.title}>Total: $76.258</Text>
+                    <Text style={styles.title}>
+                        {new Intl.DateTimeFormat('es-CL', {
+                            dateStyle: 'full',
+                        }).format(new Date())}
+                    </Text>
+                    <Text style={styles.title}>Total: ${total}</Text>
                 </View>
                 <View style={styles.table}>
                     <View style={styles.header}>
@@ -56,7 +63,7 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
     },
     conent_text: {
-        fontSize: 18,
+        fontSize: 14,
         textAlign: 'left',
         fontFamily: 'Oswald',
         marginRight: 12,
@@ -75,7 +82,7 @@ const styles = StyleSheet.create({
     },
 
     title: {
-        fontSize: 18,
+        fontSize: 16,
         textAlign: 'center',
         fontFamily: 'Oswald',
         marginRight: 60,

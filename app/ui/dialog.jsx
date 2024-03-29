@@ -84,7 +84,13 @@ export default function MyModal({ isOpen, setIsOpen, saleId, sales, setSales }) 
 
                                     <div className="mt-2 flex flex-col">
                                         <p className="text-gray-500 mb-2">
-                                            {sale.length != 0 ? sale[0].sale_date : ''}
+                                            {sale.length != 0 ? 
+                                            new Intl.DateTimeFormat('es-CL',{
+                                                dateStyle: 'full',
+                                                timeStyle : 'medium',
+                                              }).format(new Date(sale[0].sale_date ))
+                                            
+                                            : ''}
                                         </p>
 
                                         <div className='flex flex-col border-b-2'>

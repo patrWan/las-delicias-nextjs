@@ -6,7 +6,7 @@ export default async function productList() {
 
   return (
     <div>
-      Lista de productos
+      <p className='text-teal-500/80 text-sm my-2'> Lista de productos</p>
       <div className='flex flex-col bg-white shadow-md p-2 rounded-md'> 
         {products.map((product) => {
           return (
