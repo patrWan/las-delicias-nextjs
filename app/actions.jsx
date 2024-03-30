@@ -100,6 +100,9 @@ export async function addProduct(productName, productPrice) {
 }
 
 export async function deleteProduct(productId) {
+
+    let response;
+
     const requestOptions = {
         method: 'DELETE',
         headers: { 'Content-Type': 'application/json' },
@@ -107,15 +110,22 @@ export async function deleteProduct(productId) {
     };
     try {
         await fetch(`http://localhost:3000/api/products`, requestOptions)
-        .then(response => {
+        .then(response => response.json())
+        .then(data => {
             revalidatePath('/dashboard/products');
+            console.log(data)
+            response = data;
+           
         });
     } catch (error) {
-        console.log(error.code)
+        return error;
+        
     }finally {
         revalidatePath('/dashboard/products');
-        redirect('/dashboard/products');
+        return response;
     }
     
-    return {response: ''};
 }   
+
+
+

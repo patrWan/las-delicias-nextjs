@@ -15,13 +15,23 @@ export default function productList() {
       .then(data => setProducts(data));
   }
 
-  function removeProduct(product_id) {
-    const filter = products.filter(product => product.product_id !== product_id);
-    setProducts(filter);
-    toast.success('Producto removido! ' + { icon: '😸👍', });
+  async function removeProduct(product_id) {
+    const response = await deleteProduct(product_id);
 
-    deleteProduct(product_id);
-}
+    console.log(response)
+    
+    if (response == null) {
+      const filter = products.filter(product => product.product_id !== product_id);
+      setProducts(filter);
+      toast.success('Producto removido! ' + { icon: '😸👍', });
+    }else{
+      toast.error('Error ' + response.rawCode);
+    }
+
+
+
+
+  }
 
   useEffect(() => {
     fetchProducts();
@@ -36,7 +46,7 @@ export default function productList() {
             <div className='flex p-2 w-full' key={product.product_id}>
               <p
                 className='w-20 cursor-pointer hover:bg-red-400 text-center'
-                onClick={()=>removeProduct(product.product_id)}
+                onClick={() => removeProduct(product.product_id)}
               >
 
                 {product.product_id}

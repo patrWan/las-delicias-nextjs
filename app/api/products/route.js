@@ -17,11 +17,11 @@ export async function POST(req){
 export async function DELETE(req){
     const data = await req.json();
     try {
-        await deleteProduct(data);
-    } catch (error) {
-        console.log(error)
-    }
-    
+        const response = await deleteProduct(data);
+        
+        return Response.json(response); //error or null
 
-    return Response.json({mes : ''})
+    } catch (error) {
+        console.log()
+    }
 }
