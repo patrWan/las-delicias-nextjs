@@ -21,6 +21,14 @@ export const addProduct =  async(name, price) => {
     return result.rows;
 }
 
+export const deleteProduct =  async(productId) => {
+    const result = await client.execute({
+        sql : 'DELETE FROM Product WHERE Product.product_id = ?;',
+        args:[productId]
+    });
+    return result.rows;
+}
+
 export const getSales = async(date) => {
     const result = await client.execute({
         sql : 'SELECT * FROM Sale WHERE Sale.sale_date LIKE ? ORDER BY Sale.sale_date DESC;',

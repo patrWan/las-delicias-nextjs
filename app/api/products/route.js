@@ -1,4 +1,4 @@
-import { getProducts, addProduct } from '@/app/db/client';
+import { getProducts, addProduct, deleteProduct } from '@/app/db/client';
 
 export async function GET(){
     const data = await getProducts();
@@ -10,6 +10,18 @@ export async function POST(req){
     const data = await req.json();
 
     await addProduct(data.productName, data.productPrice);
+
+    return Response.json({mes : ''})
+}
+
+export async function DELETE(req){
+    const data = await req.json();
+    try {
+        await deleteProduct(data);
+    } catch (error) {
+        console.log(error)
+    }
+    
 
     return Response.json({mes : ''})
 }

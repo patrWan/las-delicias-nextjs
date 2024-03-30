@@ -13,10 +13,10 @@ export async function create(total, paid, sale) {
     m = m < 10 ? "0" + m : m;
     d = d < 10 ? "0" + d : d;
 
-    var time = now.getHours() + ":" + now.getMinutes() + ":" +now.getSeconds();
+    var time = now.getHours() + ":" + now.getMinutes() + ":" + now.getSeconds();
 
-    var date = y + "-" + m + "-" + d + " "+time;
-    
+    var date = y + "-" + m + "-" + d + " " + time;
+
     const body = {
         date,
         total,
@@ -35,7 +35,7 @@ export async function create(total, paid, sale) {
             .then(response => {
                 if (response.status == 200) {
                     revalidatePath('/dashboard');
-                    
+
                 } else {
                     alert(response.status);
                     setResult(false);
@@ -49,10 +49,10 @@ export async function create(total, paid, sale) {
         redirect('/dashboard/sales');
     }
 
-    
+
 }
 
-export async function deleteSale(sales, saleId){
+export async function deleteSale(sales, saleId) {
     const requestOptions = {
         method: 'DELETE',
         headers: { 'Content-Type': 'application/json' },
@@ -60,11 +60,11 @@ export async function deleteSale(sales, saleId){
     };
 
     let res;
-    await fetch(`http://localhost:3000/api/sales/detail`,requestOptions)
+    await fetch(`http://localhost:3000/api/sales/detail`, requestOptions)
         .then(response => {
-                console.log(response.status)
-                revalidatePath('/dashboard');
-                res = response.status;
+            console.log(response.status)
+            revalidatePath('/dashboard');
+            res = response.status;
         });
     return res;
 }
@@ -83,18 +83,39 @@ export async function addProduct(productName, productPrice) {
 
     try {
         await fetch('http://localhost:3000/api/products', requestOptions).then(response => {
-        if (response.status == 200) {
-           
-        } else {
-            alert(response.status);
-        }
-    })
+            if (response.status == 200) {
+
+            } else {
+                alert(response.status);
+            }
+        })
     } catch (error) {
         console.log(error)
-    }finally {
+    } finally {
         redirect('/dashboard/products');
     }
-    
+
 
 
 }
+
+export async function deleteProduct(productId) {
+    const requestOptions = {
+        method: 'DELETE',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(productId)
+    };
+    try {
+        await fetch(`http://localhost:3000/api/products`, requestOptions)
+        .then(response => {
+            revalidatePath('/dashboard/products');
+        });
+    } catch (error) {
+        console.log(error.code)
+    }finally {
+        revalidatePath('/dashboard/products');
+        redirect('/dashboard/products');
+    }
+    
+    return {response: ''};
+}   

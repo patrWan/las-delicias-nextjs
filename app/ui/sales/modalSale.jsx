@@ -7,7 +7,6 @@ import Popup from "../popup";
 import { TrashIcon } from '@heroicons/react/24/solid';
 import toast from 'react-hot-toast';
 import { create } from "@/app/actions";
-import { redirect } from "next/navigation";
 
 export default function modalSale(props) {
     const { sale, total, setTotal, setSale, setSelectedProduct } = props;
