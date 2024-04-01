@@ -5,7 +5,7 @@ import { deleteProduct, updateProduct } from '@/app/actions';
 
 import toast from 'react-hot-toast';
 
-import { PencilSquareIcon } from '@heroicons/react/24/solid'
+import { PencilSquareIcon, ArchiveBoxIcon } from '@heroicons/react/24/solid'
 
 export default function productList() {
 
@@ -26,8 +26,6 @@ export default function productList() {
 
   async function removeProduct(product_id) {
     const response = await deleteProduct(product_id);
-
-    console.log(response)
 
     if (response == null) {
       const filter = products.filter(product => product.product_id !== product_id);
@@ -69,15 +67,10 @@ export default function productList() {
   function handleFocus(e, product) {
     setProductId(product.product_id)
     setProductPrice(product.product_price)
-    //console.log( e.target.value + " " + product.product_price);
-    console.log('focus => ' + productId);
   }
 
   function handleFocusOut(e, product) {
-    //e.target.value = product.product_price;
-    
-    //console.log( e.target.value + " " + product.product_price);
-    console.log('focus out=> ');
+    //setProductId('')
   }
 
   useEffect(() => {
@@ -93,13 +86,9 @@ export default function productList() {
         {products.map((product) => {
           return (
             <div className='flex p-2 w-full items-center' key={product.product_id}>
-              <p
-                className='w-20 cursor-pointer hover:bg-red-400 text-center'
-                onClick={() => removeProduct(product.product_id)}
-              >
+                <ArchiveBoxIcon className='w-14 h-14 cursor-pointer text-red-500 hover:text-red-300 mx-2' onClick={() => removeProduct(product.product_id)}/>
 
-                {product.product_id}
-              </p>
+                
               <p className='w-80'>{product.product_name}</p>
               <button onClick={() => editProduct(product)} disabled={productId === product.product_id ? false : true}>
                 <PencilSquareIcon

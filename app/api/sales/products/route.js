@@ -14,7 +14,6 @@ export async function GET() {
 
     var date = y + "-" + m + "-" + d;
 
-    console.log(date);
     const data = await getProductSales(date);
 
     

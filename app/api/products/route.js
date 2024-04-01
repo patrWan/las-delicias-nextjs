@@ -9,7 +9,7 @@ export async function GET(){
 export async function POST(req){
     const data = await req.json();
     
-    await addProduct(data.id, data.name, data.price);
+    await addProduct(data.productName, data.productPrice);
 
     return Response.json({mes : ''})
 }

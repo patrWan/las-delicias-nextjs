@@ -23,7 +23,6 @@ export default function SalesTable() {
     }, 0);
 
     async function getSales(date, state = '') {
-        console.log()
         fetch(`/api/sales?date=${date}&state=${state}`)
             .then(response => response.json())
             .then(data => setSales(data));

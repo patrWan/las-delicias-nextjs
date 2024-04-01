@@ -18,7 +18,6 @@ export default function MyModal({ isOpen, setIsOpen, saleId, sales, setSales }) 
         
 
         const response = await deleteSale(sales, saleId);
-        console.log('rrrr: '+response)
 
         if(response === 200){
             const filter = sales.filter(sale => sale.sale_id !== saleId);
@@ -31,7 +30,6 @@ export default function MyModal({ isOpen, setIsOpen, saleId, sales, setSales }) 
     }
 
     async function getSalesDetail() {
-        console.log()
         await fetch(`/api/sales/detail?id=${saleId}`)
             .then(response => response.json())
             .then(data => setSale(data));
@@ -41,7 +39,6 @@ export default function MyModal({ isOpen, setIsOpen, saleId, sales, setSales }) 
     useEffect(() => {
 
         if (isOpen == true) {
-            console.log('fetch');
             getSalesDetail();
         }
     }, [isOpen])

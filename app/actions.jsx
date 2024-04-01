@@ -62,7 +62,6 @@ export async function deleteSale(sales, saleId) {
     let res;
     await fetch(`http://localhost:3000/api/sales/detail`, requestOptions)
         .then(response => {
-            console.log(response.status)
             revalidatePath('/dashboard');
             res = response.status;
         });
@@ -113,7 +112,6 @@ export async function deleteProduct(productId) {
         .then(response => response.json())
         .then(data => {
             revalidatePath('/dashboard/products');
-            console.log(data)
             response = data;
            
         });
@@ -140,8 +138,6 @@ export async function updateProduct(productUpdated) {
         await fetch(`http://localhost:3000/api/products`, requestOptions)
         .then(response => response.json())
         .then(data => {
-            revalidatePath('/dashboard/products');
-            console.log(data)
             response = data;
            
         });
@@ -149,7 +145,6 @@ export async function updateProduct(productUpdated) {
         return error;
         
     }finally {
-        revalidatePath('/dashboard/products');
         return response;
     }
     

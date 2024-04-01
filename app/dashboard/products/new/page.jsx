@@ -8,7 +8,6 @@ export default function () {
     const [productPrice, setProductPrice] = useState('');
 
     function handleProductName(e) {
-        console.log(e.target.value)
         setProductName(e.target.value)
     }
 
