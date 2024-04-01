@@ -127,5 +127,33 @@ export async function deleteProduct(productId) {
     
 }   
 
+export async function updateProduct(productUpdated) {
+
+    let response;
+
+    const requestOptions = {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(productUpdated)
+    };
+    try {
+        await fetch(`http://localhost:3000/api/products`, requestOptions)
+        .then(response => response.json())
+        .then(data => {
+            revalidatePath('/dashboard/products');
+            console.log(data)
+            response = data;
+           
+        });
+    } catch (error) {
+        return error;
+        
+    }finally {
+        revalidatePath('/dashboard/products');
+        return response;
+    }
+    
+}   
+
 
 

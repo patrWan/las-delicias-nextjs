@@ -34,6 +34,19 @@ export const deleteProduct = async (productId) => {
 
 }
 
+export const updateProduct = async (id, name, price) => {
+    try {
+        const result = await client.execute({
+            sql: 'UPDATE Product SET product_name = ?, product_price = ? WHERE product_id = ?;',
+            args: [name, price, id]
+        });
+        return null;
+    } catch (error) {
+        return error;
+    }
+
+}
+
 export const getSales = async (date) => {
     const result = await client.execute({
         sql: 'SELECT * FROM Sale WHERE Sale.sale_date LIKE ? ORDER BY Sale.sale_date DESC;',

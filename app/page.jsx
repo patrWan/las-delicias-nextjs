@@ -6,7 +6,7 @@ const noto = Lobster({ subsets: ['latin'], weight: '400' })
 export default function Home() {
   return (
     <main className="bg-pink-400 h-screen">
-      <div className="flex relative bg-teal-600 w-full"   >
+      <div className="flex relative bg-teal-600 w-full">
         <div className="bg-repeat w-screen h-screen  heropattern-overlappingcircles-teal-900/90 flex justify-center items-center flex-col md:flex-row" >
           <section className="hidden h-full md:flex md:min-h-max md:w-3/4 bg-slate-700">
             Home
