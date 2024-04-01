@@ -68,6 +68,7 @@ export default function productList() {
 
   function handleFocus(e, product) {
     setProductId(product.product_id)
+    setProductPrice(product.product_price)
     //console.log( e.target.value + " " + product.product_price);
     console.log('focus => ' + productId);
   }
