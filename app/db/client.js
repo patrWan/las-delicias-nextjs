@@ -103,6 +103,19 @@ export const deleteSale = async (sale_id) => {
     return result.rows;
 }
 
+export const updateSaleState = async (id, state) => {
+    try {
+        const result = await client.execute({
+            sql: 'UPDATE Sale SET sale_state = ? WHERE sale_id = ?;',
+            args: [state, id]
+        });
+        return null;
+    } catch (error) {
+        return error;
+    }
+
+}
+
 export const getTodaySales = async (date) => {
     const result = await client.execute({
         sql: `	SELECT SUM(Detail.detail_subtotal) AS 'total', COUNT(DISTINCT Sale.sale_id) AS 'cantidad_ventas'

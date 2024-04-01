@@ -148,7 +148,33 @@ export async function updateProduct(productUpdated) {
         return response;
     }
     
-}   
+}
+
+export async function updateSaleState(id, state) {
+
+    let response;
+
+    const requestOptions = {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({id, state})
+    };
+    try {
+        await fetch(`http://localhost:3000/api/sales/detail`, requestOptions)
+        .then(response => response.json())
+        .then(data => {
+            response = data;
+           
+        });
+    } catch (error) {
+        return error;
+        
+    }finally {
+        redirect('/dashboard/sales');
+        return response;
+    }
+    
+}  
 
 
 

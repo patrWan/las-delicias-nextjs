@@ -1,4 +1,4 @@
-import {getSaleDetail, deleteSale} from '@/app/db/client';
+import {getSaleDetail, deleteSale, updateSaleState} from '@/app/db/client';
 
 export async function GET(req){
     
@@ -15,6 +15,13 @@ export async function GET(req){
     const data = await getSaleDetail(date);
 
     return Response.json(data)
+}
+
+export async function PUT(req){
+    const data = await req.json();
+    updateSaleState(data.id, data.state);
+    
+    return Response.json({mes : ''});
 }
 
 export async function DELETE(req){

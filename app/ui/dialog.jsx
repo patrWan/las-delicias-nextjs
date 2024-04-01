@@ -2,13 +2,14 @@
 import { Dialog, Transition } from '@headlessui/react'
 import { Fragment, useEffect, useState } from 'react'
 
-import { deleteSale } from '../actions'
+import { deleteSale ,updateSaleState } from '../actions'
 
 import toast from 'react-hot-toast'
 
 export default function MyModal({ isOpen, setIsOpen, saleId, sales, setSales }) {
 
     let [sale, setSale] = useState([]);
+    let [state, setState] = useState(false);
 
     function closeModal() {
         setIsOpen(false)
@@ -36,13 +37,29 @@ export default function MyModal({ isOpen, setIsOpen, saleId, sales, setSales }) 
 
     }
 
+    async function handleCheck(e){
+        setState(!sale[0].sale_state)
+        await updateSaleState(e.target.value, !sale[0].sale_state);
+
+        const newProjects = sales.map(s =>
+            s.sale_id == sale[0].sale_id
+              ? { ...s, sale_state: !sale[0].sale_state}
+              : s
+          );
+      
+          sale[0].sale_state = !sale[0].sale_state;
+        setSales(newProjects)
+    }
+
     useEffect(() => {
 
         if (isOpen == true) {
             getSalesDetail();
         }
-    }, [isOpen])
+        
 
+    }, [isOpen])
+    
     return (
         <>
             <Transition appear show={isOpen} as={Fragment}>
@@ -75,10 +92,22 @@ export default function MyModal({ isOpen, setIsOpen, saleId, sales, setSales }) 
                                         as="h3"
                                         className="text-lg font-medium leading-6 text-gray-900 flex"
                                     >
-                                        Venta ID N° : {sale.length != 0 ? <> {sale[0].sale_id}<p className='ml-10'>{sale[0].sale_state ? '|Pagado|' : '|Pendiente|'}</p></> : ''}
+                                        Venta ID N° : {sale.length != 0 ? <> {sale[0].sale_id}
+                                            <label className='ml-auto'>
+                                                <input 
+                                                    type="checkbox" 
+                                                    id="cbox1" 
+                                                    value={sale[0].sale_id} 
+                                                    className='mr-2' 
+                                                    defaultChecked={sale[0].sale_state ? true : false}
+                                                    onChange={handleCheck}
+                                                /> 
+                                                    {sale[0].sale_state ? 'Pagado' : 'Pendiente'}
+                                            </label>
+                                            </> : ''}
 
                                     </Dialog.Title>
-
+                                        
                                     <div className="mt-2 flex flex-col">
                                         <p className="text-gray-500 mb-2">
                                             {sale.length != 0 ? 
