@@ -14,7 +14,7 @@ export default function SalesTable() {
     const [sales, setSales] = useState([]);
     const [filterState, setFilterState] = useState('');
 
-    const [saleId, setSaleId] = useState('');
+    const [sale, setSale] = useState('');
 
     let [isOpen, setIsOpen] = useState(false)
 
@@ -62,8 +62,8 @@ export default function SalesTable() {
 
     }
 
-    function handleModal(saleId) {
-        setSaleId(saleId);
+    function handleModal(sale) {
+        setSale(sale);
         setIsOpen(!isOpen);
 
     }
@@ -84,7 +84,7 @@ export default function SalesTable() {
                         <tbody >
                             {sales.map(sale => {
                                 return (
-                                    <tr className="border-b-2 border-purple-950 hover:bg-slate-200 cursor-pointer" key={sale.sale_id} onClick={() => handleModal(sale.sale_id)}>
+                                    <tr className="border-b-2 border-purple-950 hover:bg-slate-200 cursor-pointer" key={sale.sale_id} onClick={() => handleModal(sale)}>
                                         <th scope="row" className="text-xs md:text-base border-r-2 w-20">{sale.sale_id} </th>
                                         <td className="text-left p-2">
                                             <p>${sale.sale_total}</p>
@@ -122,7 +122,7 @@ export default function SalesTable() {
                 </select>
             </div>
 
-            <DialogModal isOpen={isOpen} setIsOpen={setIsOpen} saleId={saleId} setSales={setSales} sales={sales} />
+            <DialogModal isOpen={isOpen} setIsOpen={setIsOpen} saleDetail={sale} setSales={setSales} sales={sales} />
         </div>
     )
 }

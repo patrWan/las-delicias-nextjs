@@ -6,49 +6,46 @@ import { deleteSale ,updateSaleState } from '../actions'
 
 import toast from 'react-hot-toast'
 
-export default function MyModal({ isOpen, setIsOpen, saleId, sales, setSales }) {
-
+export default function MyModal({ isOpen, setIsOpen, saleDetail, sales, setSales }) {
+    
     let [sale, setSale] = useState([]);
-    let [state, setState] = useState(false);
+    let [state, setState] = useState();
+
+    
 
     function closeModal() {
         setIsOpen(false)
+        setState('')
     }
 
     async function handleDelete() {
         
 
-        const response = await deleteSale(sales, saleId);
+        const response = await deleteSale(sales, saleDetail.sale_id);
 
         if(response === 200){
-            const filter = sales.filter(sale => sale.sale_id !== saleId);
+            const filter = sales.filter(sale => sale.sale_id !== saleDetail.sale_id);
             setSales(filter)
             setIsOpen(false);
-            toast.success('Se ha removido la venta ID: '+saleId, {icon: '😸👍',});
+            toast.success('Se ha removido la venta ID: '+saleDetail.sale_id, {icon: '😸👍',});
         }
 
 
     }
 
     async function getSalesDetail() {
-        await fetch(`/api/sales/detail?id=${saleId}`)
+        await fetch(`/api/sales/detail?id=${saleDetail.sale_id}`)
             .then(response => response.json())
-            .then(data => setSale(data));
+            .then(data => {setSale(data), setState(data[0].sale_state)});
 
     }
 
     async function handleCheck(e){
-        setState(!sale[0].sale_state)
-        await updateSaleState(e.target.value, !sale[0].sale_state);
+        await updateSaleState(e.target.value, !sale[0].sale_state).then(() => {
+            saleDetail.sale_state = !saleDetail.sale_state;
+        });
 
-        const newProjects = sales.map(s =>
-            s.sale_id == sale[0].sale_id
-              ? { ...s, sale_state: !sale[0].sale_state}
-              : s
-          );
-      
-          sale[0].sale_state = !sale[0].sale_state;
-        setSales(newProjects)
+        
     }
 
     useEffect(() => {
@@ -99,10 +96,10 @@ export default function MyModal({ isOpen, setIsOpen, saleId, sales, setSales }) 
                                                     id="cbox1" 
                                                     value={sale[0].sale_id} 
                                                     className='mr-2' 
-                                                    defaultChecked={sale[0].sale_state ? true : false}
+                                                    defaultChecked={saleDetail.sale_state}
                                                     onChange={handleCheck}
                                                 /> 
-                                                    {sale[0].sale_state ? 'Pagado' : 'Pendiente'}
+                                                    {saleDetail.sale_state ? 'Pagado' : 'Pendiente'}
                                             </label>
                                             </> : ''}
 
